@@ -80,11 +80,11 @@ private:
     static bool is_arg(std::string_view s);
 
     // types of item we could meet on the command line
-    struct Single_Item	{ std::string_view name;	};                                  // "-a", "-all", "--all", "-v", "-verbose", "--verbose"
-    struct Combi_Item	{ std::string_view name;	};                                  // "-av"
-    struct Full_Item	{ std::string_view name; std::string_view value;	};          // "-num=37", "--num=37"
-    struct EOO_Item		{};                                                             // "--"
-    struct Arg_Item		{};                                                             // anything else
+    struct Single_Item  { std::string_view name;	};                                  // "-a", "-all", "--all", "-v", "-verbose", "--verbose"
+    struct Combi_Item   { std::string_view name;	};                                  // "-av"
+    struct Full_Item    { std::string_view name; std::string_view value;	};          // "-num=37", "--num=37"
+    struct EOO_Item     {};                                                             // "--"
+    struct Arg_Item     {};                                                             // anything else
     using Item = std::variant<Single_Item,Combi_Item,Full_Item,EOO_Item,Arg_Item>;
 
     // parse/classify an item from the command line
