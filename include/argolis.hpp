@@ -238,7 +238,7 @@ inline void Parser::parse(int argc, char * argv[]) const
                     _on_err({*maybe_err_type,*p});
                     if( _abort_on_error ) {
                         return end;
-                    }					
+                    }
                 }
                 return p + 1;
             },
@@ -258,19 +258,19 @@ inline void Parser::parse(int argc, char * argv[]) const
 
     // loop the remaining free-standing arguments
     // p < end instead of p != end because we might have incremented p by 2, risking so to jump after end
-    while( p < end ) {							
+    while( p < end ) {
         _on_arg(*p++);
     }
-	
+
 }
 
 inline std::optional<decltype(Parser::_specs)::const_iterator> Parser::find_spec(std::string_view name) const
-{	
+{
     assert( ! name.empty() );
 
-    const auto it = (	name.length() == 1 ?
-                std::find_if(_specs.begin(),_specs.end(),[& name](const Opt_Spec & spec){ return spec.short_name() == name[0];	}) :
-                std::find_if(_specs.begin(),_specs.end(),[& name](const Opt_Spec & spec){ return spec.long_name() == name;		}) );
+    const auto it = (   name.length() == 1 ?
+                        std::find_if(_specs.begin(),_specs.end(),[& name](const Opt_Spec & spec){ return spec.short_name() == name[0];  }) :
+                        std::find_if(_specs.begin(),_specs.end(),[& name](const Opt_Spec & spec){ return spec.long_name() == name;      }) );
         
     return (it != _specs.end() ? std::make_optional(it) : std::nullopt);
 }
@@ -324,7 +324,7 @@ inline std::optional<Error::Type> Parser::eval(std::string_view name, const std:
     }
 
     if( (*maybe_opt_it)->arg_policy() == Arg_Policy::EXPECT_ARG && ! value ) {
-        return Error::Type::MISSING_ARG;		
+        return Error::Type::MISSING_ARG;
     }
 
     if( (*maybe_opt_it)->arg_policy() == Arg_Policy::NO_ARG && value ) {
