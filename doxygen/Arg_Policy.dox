@@ -1,0 +1,16 @@
+/**
+    @enum       argolis::Arg_Policy
+    @brief      The policy regarding a command line option receiving an argument
+*/
+/**
+    @var        argolis::NO_ARG
+    @brief      An option with this policy shall not receive an argument (e.g. the typical <tt>"--help"</tt> option)
+*/
+/**
+    @var        argolis::MAYBE_ARG
+    @brief      An option with this policy might receive an argument, or not (e.g. some <tt>"--level [arg]"</tt> option, reverting to a default value if <tt>arg</tt> is not given)
+*/
+/**
+    @var        argolis::EXPECT_ARG
+    @brief      An option with this policy shall receive an argument (e.g. some <tt>"--file <arg>"</tt> option)
+*/

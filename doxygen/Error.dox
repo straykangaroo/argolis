@@ -1,0 +1,35 @@
+/**
+    @struct     argolis::Error argolis.hpp
+    @brief      Info about some kind of error occurred while parsing the command line
+*/
+
+/**
+    @enum       argolis::Error::Type
+    @brief      Type of error
+*/
+/**
+    @var        argolis::Error::BAD_OPT
+    @brief      An unrecognized option was met on the command line
+    @see        argolis::Opt_Spec::Arg_Policy
+*/
+/**
+    @var        argolis::Error::MISSING_ARG
+    @brief      An option expecting an argument did not get one
+    @see        argolis::Opt_Spec::Arg_Policy
+*/
+/**
+    @var        argolis::Error::UNEXPECTED_ARG
+    @brief      An option not accepting an argument did get one
+    @see        argolis::Opt_Spec::Arg_Policy
+*/
+
+
+/**
+    @var        argolis::Error::type
+    @brief      Type of this error
+*/
+
+/**
+    @var        argolis::Error::bad_item
+    @brief      The offending item, as found on the command line
+*/

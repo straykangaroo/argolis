@@ -1,0 +1,54 @@
+/**
+    @example{lineno}    demo.cpp
+
+    Example for a hypotetical utility saying hello to people, n times, calling them an optional adjective.
+
+    options:<br>
+    <tt>"-h"</tt>: print a help message and exit<br>
+    <tt>"-v"</tt>, <tt>"--version"</tt>: print a version message and exit<br>
+    <tt>"-c <count>"</tt>, <tt>"--count <count>"</tt>: how many times we shall repeat the greeting, for each person. Count value is mandatory if this option is given<br>
+    <tt>"-a <adjective>"</tt>, <tt>"--adjective <adjective>"</tt>: the adjective we will call each person. Value is not mandatory.<br>
+
+    arguments:<br>
+    all the remaining arguments will be considered people names
+*/
+
+/**
+    @example{lineno}    minimal_example.cpp
+
+    Minimal example of the callback-based approach
+
+
+    <b>Example invocation 1</b> - given the following command line:<br>
+
+    <pre>./minimal_example -az --num=37 hello there</pre>
+    output:
+    <pre>
+    got opt: a/all with value: {}
+    got opt: z with value: {}
+    got opt: n/num with value: 37
+    got arg: hello
+    got arg: there
+    </pre>
+
+    @note \c p.combi_allowed(true); [line 53]<br>
+    so we recognize <tt>"-az"</tt> as two separate options
+
+    <br>
+
+    <b>Example invocation 2</b> - given the following command line:<br>
+
+    <pre>./minimal_example --all x -v 45 -n -- 87 -a</pre>
+    expected output:
+    <pre>
+    unexpected argument for option: --all
+    got opt: v/verbose with value: 45
+    missing argument for option: -n
+    got arg: 87
+    got arg: -a
+    </pre>
+
+    @note no \c p.abort_on_error(true);<br>
+    so we do not stop after the first error
+
+*/

@@ -1,0 +1,110 @@
+/**
+    @class      argolis::Parser argolis.hpp
+    @brief      Callback-based command line parser
+    
+    Argolis being callback-based, unlike most other similar libraries, there is not a separate "ask if a certain option is set" step after the parsing step.<br>
+    Instead, you are supposed to register callbacks for the options you want to allow. Argolis will invoke said callbacks synchronously while parsing the command line.<br>
+    Same goes for free-standing arguments and errors.
+
+    Allowed options and their properties are provided to the parser via Opt_Spec objects.<br>
+    Options may start with a single dash <tt>"-"</tt> (short form only, see later on) or a double dash <tt>"--"</tt> and may be in short (<tt>"-a"</tt>) or, optionally, long (<tt>"--all"</tt>, <tt>"-all"</tt>) form.<br>
+    Option arguments may follow the option switch (<tt>"--count 42"</tt>) or be joined to it in a key-value form (<tt>"--count=42"</tt>)<br>
+    If an "end of options" marker (<tt>"--"</tt>) is found, anything afterwards will be considered a free-standing arguments.<br>
+    The first item found on the command line which is not an option, an argument for an option, or the "end of options" marker will be considered a free-standing arguments,
+    and the same will go for any following items.
+
+    Possible option variants:
+    @code
+	-c
+	-c arg
+	--count
+	--count arg
+	--count=arg
+    @endcode
+
+    Allowed only if <tt>combi_allowed() == true</tt> :
+    @code
+	-abc		    ( equivalent to: -a -b -c )
+	-abc arg	    ( equivalent to: -a -b -c arg )
+    @endcode
+
+    Allowed only if <tt>combi_allowed() == false</tt> :
+    @code
+    -count
+    -count arg
+    -count=arg
+	-c=arg
+    @endcode
+*/
+
+/**
+    @typedef    argolis::Parser::Arg_Handler
+    @brief      The type of the callback invoked by Parser::parse() when a free-standing argument is met on the command line
+     
+    The callback shall be a \c Callable receiving:
+        - said argument, by value as a \c std::string_view
+
+    and returning \c void
+*/
+
+/**
+    @typedef    argolis::Parser::Error_Handler
+    @brief      The type of the callback invoked by Parser::parse() when an error occurs while parsing the command line
+     
+    The callback shall be a \c Callable receiving:
+        - the error, by value as an \c argolis::Error
+
+    and returning \c void
+*/
+
+/**
+    @fn         argolis::Parser::Parser(std::initializer_list<Opt_Spec> spec_list = {})
+    @brief      Construct a Parser with a list of option specifications
+    @param      spec_list       a list of option specifications
+*/
+
+/**
+    @fn         void argolis::Parser::add_opt(const Opt_Spec & spec)
+    @brief      Add an option specification to this Parser
+    @param      spec        an option specification
+*/
+
+/**
+    @fn         void argolis::Parser::combi_allowed(bool allowed)
+    @brief      Allow/disallow options such as "-hex" being interpreted as three separate options (<tt>"-h"</tt>, <tt>"-e"</tt>, <tt>"-x"</tt>), instead of as a single <tt>"-hex"</tt> option
+    @param      allowed     allow "combined" options
+    @note       This setting is not allowed by default
+*/
+
+/**
+    @fn         void argolis::Parser::abort_on_error(bool abort)
+    @brief      Whether to abort the parsing after the first error
+    @param      abort   abort on first error
+    @note       This setting is not allowed by default
+*/
+
+/**
+    @fn         void argolis::Parser::on_arg(const Arg_Handler & handler)
+    @brief      Set the callback that will be called by Parser::parse() when a free-standing argument (i.e. not tied to an option) is met on the command line
+    @param      handler     the callback. Must not be empty (i.e. must refer to a valid \c Callable)
+    @pre        <tt>(bool)handler</tt>
+    @see        argolis::Parser::Arg_Handler
+*/
+
+/**
+    @fn         void argolis::Parser::on_err(const Error_Handler & handler)
+    @brief      Set the callback that will be called by Parser::parse() when the parser runs into an error
+    @param      handler     the callback. Must not be empty (i.e. must refer to a valid \c Callable)
+    @pre        <tt>(bool)handler</tt>
+    @see        argolis::Parser::Error_Handler
+*/
+
+/**
+    @fn         void argolis::Parser::parse(int argc, char * argv[]) const
+    @brief      Parse the given command line, invoking handlers as needed
+    @param      argc        number of items in argv
+    @param      argv        command line items (array of null-terminated C strings)
+    @pre        <tt>argc > 0</tt>
+    @note       \c argv[0] will be skipped, as it is supposed to hold the executable name
+    @note       If you wish, you may also ask to parse only a (contiguous) subset of the items on the command line, as long as you provide coherent \c argc and \c argv params
+*/

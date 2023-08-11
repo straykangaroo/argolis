@@ -1,0 +1,70 @@
+/**
+    @class      argolis::Opt_Spec argolis.hpp
+    @brief      Specification for a command line option
+
+	An Opt_Spec specifies:
+		- the name of the option, both in short ( e.g. <tt>"-v"</tt> ) and (optionally) long ( e.g. <tt>"--verbose"</tt> or <tt>"-verbose"</tt> ) form
+		- whether the option shall not / might / shall accept an argument
+		- a callback action that will be called when such option is met on the command line. The action shall be a \c Callable receiving:
+			- this same Opt_Spec (so you can have the same callback for multiple options)
+			- the (optional) option's argument as an (optional) \c std::string_view
+
+*/
+
+/**
+    @typedef    argolis::Opt_Spec::Action
+    @brief      The type of the callback associated to an option
+
+    The callback shall be a \c Callable receiving:
+        - the invoking \c Opt_Spec by const-ref (so you can have the same callback for multiple options)
+        - the (optional) option's argument by value as a \c std::optional<std::string_view>
+    and returning \c void
+
+    @note       the (optional) std::string_view might be empty (zero-length) if an empty argument was specified, as in<br>
+    <tt>"--name ''"</tt><br>
+    or<br>
+    <tt>"--name="</tt>
+*/
+
+/**
+    @fn         argolis::Opt_Spec::Opt_Spec(char short_name, const std::string & long_name, Arg_Policy arg_policy, const Action & action)
+    @brief      Construct a specification for an option having both a "short" and a "long" name
+    @param      short_name      option name in short form ( e.g. <tt>"-v"</tt> )
+    @param      long_name       option name in long form ( e.g. <tt>"--verbose"</tt> or <tt>"-verbose"</tt> )
+    @param      arg_policy      the policy regarding this option having an argument
+    @param      action          callback called when this option is met on the command line. Must not be empty
+    @pre        <tt>(bool) action</tt>
+*/
+
+/**
+    @fn         argolis::Opt_Spec::Opt_Spec(char short_name, Arg_Policy arg_policy, const Action & action)
+    @brief      Construct a specification for an option having a "short" name only
+    @param      short_name      option name in short form ( e.g. <tt>"-v"</tt> )
+    @param      arg_policy      the policy regarding this option having an argument
+    @param      action          callback called when this option is met on the command line. Must not be empty
+    @pre        <tt>(bool) action</tt>
+*/
+
+/**
+    @fn         argolis::Opt_Spec::short_name() const
+    @brief      Return the short name
+    @return     The short name
+*/
+
+/**
+    @fn         argolis::Opt_Spec::long_name() const
+    @brief      Return the long name
+    @return     The long name
+*/
+
+/**
+    @fn         argolis::Opt_Spec::arg_policy() const
+    @brief      Return the policy regarding this option having an argument
+    @return     The policy regarding this option having an argument
+*/
+
+/**
+    @fn         argolis::Opt_Spec::action(const std::optional<std::string_view> & value) const
+    @brief      Invoke this options's associated callback with some (optional) argument
+    @param      value           the (optional) argument
+*/
