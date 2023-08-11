@@ -4,15 +4,15 @@ Argolis is a __no-nonsense__, small, header-only, __callback-based__ command lin
 
 
 ## Features:
-    - Callback-based: you register your handlers for options, arguments and errors, and they will be invoked synchronously during the parsing phase, no need for a subsequent step asking "did you see option '-x' ?"
-    - Options allowed in short (`-a`) or, optionally, long (`--all`, `-all`) form
-    - Options can be specified to require / forbid / do not mind being followed by an argument
-    - Option arguments may follow the option itself (`--count 42`) or be joined to it in a key-value form (`--count=42`)
-    - Combi options can be allowed (e.g. `-avc <arg>` being equivalent to `-a -v -c <arg>`)
-    - "End of options" marker (i.e. `--`) supported
-    - Include-only library
-    - Doxygen documentation
-    - Requires C++17
+- Callback-based: you register your handlers for options, arguments and errors, and they will be invoked synchronously during the parsing phase, no need for a subsequent step asking "did you see option '-x' ?"
+- Options allowed in short (`-a`) or, optionally, long (`--all`, `-all`) form
+- Options can be specified to require / forbid / do not mind being followed by an argument
+- Option arguments may follow the option itself (`--count 42`) or be joined to it in a key-value form (`--count=42`)
+- Combi options can be allowed (e.g. `-avc <arg>` being equivalent to `-a -v -c <arg>`)
+- "End of options" marker (i.e. `--`) supported
+- Include-only library
+- Doxygen documentation
+- Requires C++17
 
 
 ## Getting started
