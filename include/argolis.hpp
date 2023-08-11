@@ -242,12 +242,12 @@ inline void Parser::parse(int argc, char * argv[]) const
                 }
                 return p + 1;
             },
-            [& opt_loop, & p](EOO_Item) // -> auto
+            [& opt_loop, & p](EOO_Item) -> auto
             {
                 opt_loop = false;
                 return p + 1;
             },
-            [& opt_loop, & p](Arg_Item) // -> auto
+            [& opt_loop, & p](Arg_Item) -> auto
             {
                 opt_loop = false;
                 return p;
